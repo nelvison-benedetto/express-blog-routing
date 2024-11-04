@@ -16,8 +16,6 @@ app.listen(PORT,(req,res)=>{
 });
 
 app.get('/',(req,res)=>{
-    res.send('
-        <ul>
-        ');
+    res.send('Main Page');
 });
 app.use('/:slug',PostsRouter);
