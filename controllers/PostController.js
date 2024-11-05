@@ -18,9 +18,9 @@ const show = (req,res) =>{
      //Number assicura che sia un num
     if(!post){
         return res.status(404).json({
-            error : '404! Not Found'  //.json convert this obj js in json and edit the res header dicendo che i dati sono in formato json
+            error : '404! Not Found Show'  //.json convert this obj js in json and edit the res header dicendo che i dati sono in formato json
         })
-    }
+    }   
     return res.status(200).json({
         data : post
     })
@@ -49,8 +49,23 @@ const store = (req,res) =>{
     });
 }
 
+const filterByTag = (req,res)=>{
+    const tag = req.query.tag; //read from query str i.e. ?tag=Dolci
+    if (!tag){
+        return res.status(404).json({
+            error : '404! Not Found Tag!'
+        })
+    }
+    const filteredPosts = posts.filter((item,index)=> item.tags.includes(tag));
+    res.status(200).json({
+        data : filteredPosts,
+        counter : filteredPosts.length
+    })
+}
+
 module.exports = {
     index,
     show,
-    store
+    store,
+    filterByTag
 }
